@@ -1,22 +1,22 @@
 #include <Arduino.h>
-#include "ThrusterServo.h"
+#include "BallastPump.h"
 
 int main() {
     init();
-    
-    ThrusterServo azimuth(3);
-    azimuth.begin();
-    
+    Serial.begin(9600);
+    delay(5000);
+
+    // If your driver inverts the signal, set second arg to true
+    BallastPump pump(2);
+    pump.begin();
+
     while(1) {
-        azimuth.set_angle(0);      // Turn full left
-        delay(2000);
-        
-        azimuth.set_angle(360);    // Turn full right
-        delay(2000);
-        
-        azimuth.center();          // Return to center
-        delay(2000);
-      
+        Serial.println("pump START");
+        pump.start();
+        delay(5000);
+        Serial.println("pump STOP");
+        pump.stop();
+        delay(5000);
     }
     return 0;
 }

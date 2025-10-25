@@ -34,16 +34,6 @@ public:
         return current_angle;
     }
     
-    void set_microseconds(int us) {
-        us = constrain(us, MIN_PULSE, MAX_PULSE);
-        current_angle = map(us, MIN_PULSE, MAX_PULSE, MIN_ANGLE, MAX_ANGLE);
-        servo.writeMicroseconds(us);
-    }
-    
-    int get_microseconds() const {
-        return map(current_angle, MIN_ANGLE, MAX_ANGLE, MIN_PULSE, MAX_PULSE);
-    }
-    
     void center() {
         set_angle(180);
     }
