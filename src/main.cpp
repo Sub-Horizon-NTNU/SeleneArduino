@@ -1,14 +1,20 @@
 #include <Arduino.h>
+#include "Thruster.h"
 
-void setup() {
-  pinMode(13, OUTPUT);
-  Serial.begin(9600);
-}
-
-void loop() {
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
-  Serial.println("Blink!");
+int main() {
+    init();
+    Thruster thruster(2);
+    thruster.begin();
+    
+    while(1) {
+        thruster.set_power(10);
+        delay(1000);
+        thruster.stop();
+        delay(5000);
+        thruster.set_power(-10);
+        delay(1000);
+        thruster.stop();
+        delay(5000);
+    }
+    return 0;
 }
