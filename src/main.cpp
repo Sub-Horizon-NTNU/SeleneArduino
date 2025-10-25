@@ -1,20 +1,22 @@
 #include <Arduino.h>
-#include "Thruster.h"
+#include "ThrusterServo.h"
 
 int main() {
     init();
-    Thruster thruster(2);
-    thruster.begin();
+    
+    ThrusterServo azimuth(3);
+    azimuth.begin();
     
     while(1) {
-        thruster.set_power(10);
-        delay(1000);
-        thruster.stop();
-        delay(5000);
-        thruster.set_power(-10);
-        delay(1000);
-        thruster.stop();
-        delay(5000);
+        azimuth.set_angle(0);      // Turn full left
+        delay(2000);
+        
+        azimuth.set_angle(360);    // Turn full right
+        delay(2000);
+        
+        azimuth.center();          // Return to center
+        delay(2000);
+      
     }
     return 0;
 }
